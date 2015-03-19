@@ -13,7 +13,7 @@ define tse_awsnodes::linuxnode (
   $pe_master_hostname,
 ) {
 
-  ec2_instance { 'tse_f5_demo_agent_4':
+  ec2_instance { $nodename:
     ensure            => 'running',
     availability_zone => $availability_zone,
     image_id          => $image_id,
