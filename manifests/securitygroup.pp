@@ -1,6 +1,11 @@
 class tse_awsnodes::securitygroup (
   region = $::ec2_region,
 ) {
+  $tse_tags = {
+      'department' => 'TSE',
+      'project'    => 'Infrastructure',
+      'created_by' => 'cbarker',
+    }
 
   ec2_securitygroup { 'tse-master':
     ensure      => present,
@@ -37,11 +42,7 @@ class tse_awsnodes::securitygroup (
         security_group => 'tse-agents',
       },
     ],
-    tags           => {
-      'Department' => 'TSE',
-      'Project'    => 'Infrastructure',
-      'created_by' => 'cbarker',
-    }
+    tags => $tse_tags,
   }
 
   ec2_securitygroup { 'tse-agents':
@@ -92,10 +93,6 @@ class tse_awsnodes::securitygroup (
         security_group => 'tse-agents',
       },
     ],
-    tags           => {
-      'Department' => 'TSE',
-      'Project'    => 'Infrastructure',
-      'created_by' => 'cbarker',
-    }
+    tags => $tse_tags,
   }
 }

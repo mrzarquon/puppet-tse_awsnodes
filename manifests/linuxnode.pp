@@ -23,8 +23,8 @@ define tse_awsnodes::linuxnode (
     security_groups   => $security_groups,
     subnet            => $subnet,
     tags              => {
-      'Department'    => 'TSE',
-      'Project'       => $project,
+      'department'    => 'TSE',
+      'project'       => $project,
       'created_by'    => $created_by, 
     },
     user_data         => template('tse_awsnodes/linux.erb'),

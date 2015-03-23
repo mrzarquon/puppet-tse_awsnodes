@@ -1,17 +1,18 @@
 define tse_awsnodes::windowsnode (
   $nodename = $title,
   $availability_zone = $::ec2_placement_availability_zone,
-  $image_id = 'ami-59f2d769',
+  $image_id = $tse_awsnodes::params::windows2012,
   $region = $::ec2_region,
   $instance_type = 'm3.medium',
-  $security_groups = ['cbarker_awsdemo'],
-  $subnet = 'cbarker-tse-subnet-b',
+  $security_groups = $tse_awsnodes::params::security_groups,
+  $subnet = $tse_awsnodes::params::subnet,
   $pe_version_string = $::pe_version,
   $project,
   $created_by,
   $key_name,
   $pe_master_hostname,
 ) {
+  include tse_awsnodes::params
 
   ec2_instance { $nodename:
     ensure            => 'running',
@@ -23,8 +24,8 @@ define tse_awsnodes::windowsnode (
     security_groups   => $security_groups,
     subnet            => $subnet,
     tags              => {
-      'Department'    => 'TSE',
-      'Project'       => $project,
+      'department'    => 'TSE',
+      'project'       => $project,
       'created_by'    => $created_by, 
     },
     user_data         => template('tse_awsnodes/windows.erb'),

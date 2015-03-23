@@ -3,8 +3,8 @@ class tse_awsnodes::vpc (
 ) {
 
   $tse_tags = {
-    'Department' => 'TSE',
-    'Project'    => 'Infrastructure',
+    'department' => 'TSE',
+    'project'    => 'Infrastructure',
     'created_by' => 'cbarker',
   }
 
