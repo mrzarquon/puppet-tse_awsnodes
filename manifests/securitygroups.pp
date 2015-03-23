@@ -1,5 +1,5 @@
-class tse_awsnodes::securitygroup (
-  region = $::ec2_region,
+class tse_awsnodes::securitygroups (
+  $region = $::ec2_region,
 ) {
   $tse_tags = {
       'department' => 'TSE',
@@ -34,12 +34,12 @@ class tse_awsnodes::securitygroup (
         cidr     => '0.0.0.0/0',
       },
       {
-        cidr => '10.0.0.0/16', 
+        cidr => '10.98.0.0/16', 
         port => '-1', 
         protocol => 'icmp'
       },
       {
-        security_group => 'tse-agents',
+       security_group => 'tse-agents',
       },
     ],
     tags => $tse_tags,
@@ -82,7 +82,7 @@ class tse_awsnodes::securitygroup (
         cidr     => '0.0.0.0/0',
       },
       {
-        cidr => '10.0.0.0/16', 
+        cidr => '10.98.0.0/16', 
         port => '-1', 
         protocol => 'icmp'
       },

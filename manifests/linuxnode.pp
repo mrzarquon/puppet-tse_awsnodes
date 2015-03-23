@@ -1,18 +1,19 @@
 define tse_awsnodes::linuxnode (
   $nodename = $title,
   $availability_zone = $::ec2_placement_availability_zone,
-  $image_id = $::ec2_ami_id,
+  $image_id = $tse_awsnodes::params::redhat7,
   $region = $::ec2_region,
   $instance_type = 'm3.medium',
-  $security_groups = ['cbarker_awsdemo'],
-  $subnet = 'cbarker-tse-subnet-b',
+  $security_groups = $tse_awsnodes::params::security_groups,
+  $subnet = $tse_awsnodes::params::subnet,
   $pe_version_string = $::pe_version,
   $project,
   $created_by,
   $key_name,
   $pe_master_hostname,
 ) {
-
+  include tse_awsnodes::params
+  
   ec2_instance { $nodename:
     ensure            => 'running',
     availability_zone => $availability_zone,

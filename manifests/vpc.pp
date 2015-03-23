@@ -1,5 +1,5 @@
 class tse_awsnodes::vpc (
-  region = $::ec2_region,
+  $region = $::ec2_region,
 ) {
 
   $tse_tags = {
@@ -11,7 +11,7 @@ class tse_awsnodes::vpc (
   ec2_vpc { 'tse-vpc':
     ensure     => present,
     region     => $region,
-    cidr_block => '10.0.0.0/16',
+    cidr_block => '10.98.0.0/16',
     tags       => $tse_tags,
   }
 
@@ -19,40 +19,40 @@ class tse_awsnodes::vpc (
     ensure            => present,
     region            => $region,
     vpc               => 'tse-vpc',
-    cidr_block        => '10.0.10.0/24',
+    cidr_block        => '10.98.10.0/24',
     availability_zone => "${region}a",
     route_table       => 'tse-routes',
-    require           => ec2_vpc['tse-vpc'],
+    require           => Ec2_vpc['tse-vpc'],
     tags              => $tse_tags,
   }
   ec2_vpc_subnet { 'tse-subnet-avza-2':
     ensure            => present,
     region            => $region,
     vpc               => 'tse-vpc',
-    cidr_block        => '10.0.20.0/24',
+    cidr_block        => '10.98.20.0/24',
     availability_zone => "${region}a",
     route_table       => 'tse-routes',
-    require           => ec2_vpc['tse-vpc'],
+    require           => Ec2_vpc['tse-vpc'],
     tags              => $tse_tags,
   }
   ec2_vpc_subnet { 'tse-subnet-avza-3':
     ensure            => present,
     region            => $region,
     vpc               => 'tse-vpc',
-    cidr_block        => '10.0.30.0/24',
+    cidr_block        => '10.98.30.0/24',
     availability_zone => "${region}a",
     route_table       => 'tse-routes',
-    require           => ec2_vpc['tse-vpc'],
+    require           => Ec2_vpc['tse-vpc'],
     tags              => $tse_tags,
   }
   ec2_vpc_subnet { 'tse-subnet-avzb-1':
     ensure            => present,
     region            => $region,
     vpc               => 'tse-vpc',
-    cidr_block        => '10.0.110.0/24',
+    cidr_block        => '10.98.110.0/24',
     availability_zone => "${region}b",
     route_table       => 'tse-routes',
-    require           => ec2_vpc['tse-vpc'],
+    require           => Ec2_vpc['tse-vpc'],
     tags              => $tse_tags,
   }
   
@@ -60,7 +60,7 @@ class tse_awsnodes::vpc (
     ensure  => present,
     region  => $region,
     vpc     => 'tse-vpc',
-    require => ec2_vpc['tse-vpc'],
+    require => Ec2_vpc['tse-vpc'],
     tags    => $tse_tags,
   }
 
@@ -70,7 +70,7 @@ class tse_awsnodes::vpc (
     vpc    => 'tse-vpc',
     routes => [
       {
-        destination_cidr_block => '10.0.0.0/16',
+        destination_cidr_block => '10.98.0.0/16',
         gateway                => 'local',
       },
       {
@@ -79,9 +79,9 @@ class tse_awsnodes::vpc (
       },
     ],
     require  => [
-      ec2_vpc['tse-vpc'],
-      ec2_vpc_internet_gateway['tse-igw'],
-    ]
+      Ec2_vpc['tse-vpc'],
+      Ec2_vpc_internet_gateway['tse-igw'],
+    ],
     tags => $tse_tags,
   }
 
