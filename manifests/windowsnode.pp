@@ -1,9 +1,9 @@
 define tse_awsnodes::windowsnode (
   $nodename = $title,
-  $availability_zone = 'us-west-2b',
+  $availability_zone = $::ec2_placement_availability_zone,
   $image_id = 'ami-59f2d769',
+  $region = $::ec2_region,
   $instance_type = 'm3.medium',
-  $region = 'us-west-2',
   $security_groups = ['cbarker_awsdemo'],
   $subnet = 'cbarker-tse-subnet-b',
   $pe_version_string = $::pe_version,
