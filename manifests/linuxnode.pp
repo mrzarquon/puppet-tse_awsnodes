@@ -7,6 +7,7 @@ define tse_awsnodes::linuxnode (
   $security_groups = $tse_awsnodes::params::security_groups,
   $subnet = $tse_awsnodes::params::subnet,
   $pe_version_string = $::pe_version,
+  $department = 'TSE',
   $project,
   $created_by,
   $key_name,
@@ -24,7 +25,7 @@ define tse_awsnodes::linuxnode (
     security_groups   => $security_groups,
     subnet            => $subnet,
     tags              => {
-      'department'    => 'TSE',
+      'department'    => $department,
       'project'       => $project,
       'created_by'    => $created_by, 
     },

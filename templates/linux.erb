@@ -2,8 +2,44 @@
 # this assumes this template is being called by the tse_awsnodes::linuxnode defined type
 # the $nodename = $title
 PE_MASTER='<%= @pe_master_hostname %>'
+AWS_INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+PE_CERTNAME="<%= @nodename %>-$AWS_INSTANCE_ID"
+PP_DEPARTMENT='<%= @department %>'
+PP_PROJECT='<%= @project %>'
+PP_CREATED_BY='<%= @created_by %>'
 
-PE_CERTNAME="<%= @nodename %>-$(curl -s http://169.254.169.254/latest/meta-data/instance-id)"
+function write_csr_attributes () {
+  if [ ! -d /etc/puppetlabs/puppet ]; then
+    mkdir -p /etc/puppetlabs/puppet
+  fi
+  # Until PUP-3986 is shipping live, these
+  # are the attribute names.
+  # we can leave these as OID's here and
+  # they will resolve in the future as OID
+  # or as name in the future 
+  # 1.3.6.1.4.1.34380.1.1.15 = pp_department
+  # 1.3.6.1.4.1.34380.1.1.11 = pp_created_by
+  # 1.3.6.1.4.1.34380.1.1.7 = pp_project
 
-curl -sk https://$PE_MASTER:8140/packages/current/install.bash | /bin/bash -s agent:certname=$PE_CERTNAME
+  cat > /etc/puppetlabs/puppet/csr_attributes.yaml << YAML
+extension_requests:
+  pp_instance_id: $AWS_INSTANCE_ID
+YAML
 
+  if [ ! -z "${PP_DEPARTMENT}" ]; then
+    echo "  1.3.6.1.4.1.34380.1.1.15: ${PP_DEPARTMENT}" >> /etc/puppetlabs/puppet/csr_attributes.yaml
+  done
+  if [ ! -z "${PP_PROJECT}" ]; then
+    echo "  1.3.6.1.4.1.34380.1.1.7: ${PP_PROJECT}" >> /etc/puppetlabs/puppet/csr_attributes.yaml
+  done
+  if [ ! -z "${PP_CREATED_BY} ]"; then
+    echo "  1.3.6.1.4.1.34380.1.1.11: ${PP_CREATED_BY}" >> /etc/puppetlabs/puppet/csr_attributes.yaml
+  done
+}
+
+function install_pe_agent () {
+  curl -sk https://$PE_MASTER:8140/packages/current/install.bash | /bin/bash -s agent:certname=$PE_CERTNAME
+}
+
+write_csr_attributes
+install_pe_agent
