@@ -34,53 +34,52 @@ function write_csr_attributes () {
 extension_requests:
   pp_instance_id: $PP_INSTANCE_ID
   pp_image_name: $PP_IMAGE_NAME
-YAML
-  
 <%- if @pp_uuid -%>
-  echo '  pp_uuid: <%= @pp_uuid %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  pp_uuid: <%= @pp_uuid %>'
 <%- end -%>
 <%- if @pp_preshared_key -%>
-  echo '  pp_preshared_key: <%= @pp_preshared_key %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  pp_preshared_key: <%= @pp_preshared_key %>'
 <%- end -%>
 <%- if @pp_cost_center -%>
-  echo '  1.3.6.1.4.1.34380.1.1.5: <%= @pp_cost_center %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.5: <%= @pp_cost_center %>'
 <%- end -%>
 <%- if @pp_product -%>
-  echo '  1.3.6.1.4.1.34380.1.1.6: <%= @pp_product %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.6: <%= @pp_product %>'
 <%- end -%>
 <%- if @pp_project -%>
-  echo '  1.3.6.1.4.1.34380.1.1.7: <%= @pp_project %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.7: <%= @pp_project %>'
 <%- end -%>
 <%- if @pp_application -%>
-  echo '  1.3.6.1.4.1.34380.1.1.8: <%= @pp_application %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.8: <%= @pp_application %>'
 <%- end -%>
 <%- if @pp_service -%>
-  echo '  1.3.6.1.4.1.34380.1.1.9: <%= @pp_service %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.9: <%= @pp_service %>'
 <%- end -%>
 <%- if @pp_employee -%>
-  echo '  1.3.6.1.4.1.34380.1.1.10: <%= @pp_employee %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.10: <%= @pp_employee %>'
 <%- end -%>
 <%- if @pp_created_by -%>
-  echo '  1.3.6.1.4.1.34380.1.1.11: <%= @pp_created_by %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.11: <%= @pp_created_by %>'
 <%- end -%>
 <%- if @pp_environment -%>
-  echo '  1.3.6.1.4.1.34380.1.1.12: <%= @pp_environment %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.12: <%= @pp_environment %>'
 <%- end -%>
 <%- if @pp_role -%>
-  echo '  1.3.6.1.4.1.34380.1.1.13: <%= @pp_role %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.13: <%= @pp_role %>'
 <%- end -%>
 <%- if @pp_software_version -%>
-  echo '  1.3.6.1.4.1.34380.1.1.14: <%= @pp_software_version %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.14: <%= @pp_software_version %>'
 <%- end -%>
 <%- if @pp_department -%>
-  echo '  1.3.6.1.4.1.34380.1.1.15: <%= @pp_department %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.15: <%= @pp_department %>' 
 <%- end -%>
 <%- if @pp_cluster -%>
-  echo '  1.3.6.1.4.1.34380.1.1.16: <%= @pp_cluster %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.16: <%= @pp_cluster %>'
 <%- end -%>
 <%- if @pp_provisioner -%>
-  echo '  1.3.6.1.4.1.34380.1.1.17: <%= @pp_provisioner %>' >> /etc/puppetlabs/puppet/csr_attributes.yaml 
+  1.3.6.1.4.1.34380.1.1.17: <%= @pp_provisioner %>'
 <%- end -%>
+YAML
 }
 
 function install_pe_agent () {
