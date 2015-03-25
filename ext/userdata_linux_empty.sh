@@ -2,7 +2,7 @@
 
 # ERB generated userdata script
 
-PE_MASTER='hostname: master.foo.com'
+PE_MASTER='master.foo.com'
 AWS_INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 
 PE_CERTNAME="${AWS_INSTANCE_ID}" 
