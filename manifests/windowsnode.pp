@@ -7,9 +7,9 @@ define tse_awsnodes::windowsnode (
   $security_groups = $tse_awsnodes::params::security_groups,
   $subnet = $tse_awsnodes::params::subnet,
   $pe_version_string = $::pe_version,
-  $department = 'TSE',
-  $project,
-  $created_by,
+  $pp_department = 'TSE',
+  $pp_project,
+  $pp_created_by,
   $key_name,
   $pe_master_hostname,
 ) {
@@ -25,9 +25,9 @@ define tse_awsnodes::windowsnode (
     security_groups   => $security_groups,
     subnet            => $subnet,
     tags              => {
-      'department'    => $department,
-      'project'       => $project,
-      'created_by'    => $created_by, 
+      'department'    => $pp_department,
+      'project'       => $pp_project,
+      'created_by'    => $pp_created_by, 
     },
     user_data         => template('tse_awsnodes/windows.erb'),
   }
