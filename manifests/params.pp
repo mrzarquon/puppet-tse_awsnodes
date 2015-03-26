@@ -4,7 +4,6 @@ class tse_awsnodes::params {
     # North America
     'us-west-2': {
       $security_groups = ['tse-agents']
-      $subnet = 'tse-subnet-avza-1'
       $redhat7 = 'ami-4dbf9e7d'
       $redhat6 = 'ami-2faa861f'
       $windows2012 = 'ami-7f634e4f'
@@ -16,7 +15,6 @@ class tse_awsnodes::params {
     # Sydney
     'ap-southeast-2': {
       $security_groups = ['tse-agents']
-      $subnet = 'tse-subnet-avza-1'
       $redhat7 = 'ami-d3daace9'
       $redhat6 = 'ami-e5ec9cdf'
       $windows2012 = 'ami-dd1b6be7'
@@ -29,7 +27,6 @@ class tse_awsnodes::params {
     # UK + Ireland
     'eu-west-1': {
       $security_groups = ['tse-agents']
-      $subnet = 'tse-subnet-avza-1'
       $redhat7 = 'ami-25158352'
       $redhat6 = 'ami-837de3f4'
       $windows2012 = 'ami-5d62ff2a'
@@ -39,7 +36,19 @@ class tse_awsnodes::params {
       $amazonlinux = 'ami-ef158898'
     }
     default: {
-      fail("This module is only meant for aws, ec2_regions: us-west-2, ap-southeast-2, eu-central-1, eu-west-1")
+      fail("This module is only meant for aws, ec2_regions: us-west-2, ap-southeast-2, eu-west-1")
+    }
+  }
+
+  case $::ec2_placement_availability_zone {
+    'us-west-2a', 'ap-southeast-2a', 'eu-west-1a': {
+      $subnet = 'tse-subnet-avza-1'
+    }
+    'us-west-2b', 'ap-southeast-2b', 'eu-west-1b': {
+      $subnet = 'tse-subnet-avzb-1'
+    }
+    default: {
+      fail("This module is only meant for aws, ec2_regions: us-west-2, ap-southeast-2, eu-west-1")
     }
   }
 }
