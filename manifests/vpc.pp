@@ -1,5 +1,5 @@
-class tse_awsnodes::vpc (
-  $region = $::ec2_region,
+define tse_awsnodes::vpc (
+  $region = $title,
 ) {
 
   $tse_tags = {
@@ -16,44 +16,48 @@ class tse_awsnodes::vpc (
   }
 
   ec2_vpc_subnet { 'tse-subnet-avza-1':
-    ensure            => present,
-    region            => $region,
-    vpc               => 'tse-vpc',
-    cidr_block        => '10.98.10.0/24',
-    availability_zone => "${region}a",
-    route_table       => 'tse-routes',
-    require           => Ec2_vpc['tse-vpc'],
-    tags              => $tse_tags,
+    ensure                  => present,
+    region                  => $region,
+    vpc                     => 'tse-vpc',
+    cidr_block              => '10.98.10.0/24',
+    availability_zone       => "${region}a",
+    route_table             => 'tse-routes',
+    map_public_ip_on_launch => true,
+    require                 => Ec2_vpc['tse-vpc'],
+    tags                    => $tse_tags,
   }
   ec2_vpc_subnet { 'tse-subnet-avza-2':
-    ensure            => present,
-    region            => $region,
-    vpc               => 'tse-vpc',
-    cidr_block        => '10.98.20.0/24',
-    availability_zone => "${region}a",
-    route_table       => 'tse-routes',
-    require           => Ec2_vpc['tse-vpc'],
-    tags              => $tse_tags,
+    ensure                  => present,
+    region                  => $region,
+    vpc                     => 'tse-vpc',
+    cidr_block              => '10.98.20.0/24',
+    availability_zone       => "${region}a",
+    route_table             => 'tse-routes',
+    map_public_ip_on_launch => true,
+    require                 => Ec2_vpc['tse-vpc'],
+    tags                    => $tse_tags,
   }
   ec2_vpc_subnet { 'tse-subnet-avza-3':
-    ensure            => present,
-    region            => $region,
-    vpc               => 'tse-vpc',
-    cidr_block        => '10.98.30.0/24',
-    availability_zone => "${region}a",
-    route_table       => 'tse-routes',
-    require           => Ec2_vpc['tse-vpc'],
-    tags              => $tse_tags,
+    ensure                  => present,
+    region                  => $region,
+    vpc                     => 'tse-vpc',
+    cidr_block              => '10.98.30.0/24',
+    availability_zone       => "${region}a",
+    route_table             => 'tse-routes',
+    map_public_ip_on_launch => true,
+    require                 => Ec2_vpc['tse-vpc'],
+    tags                    => $tse_tags,
   }
   ec2_vpc_subnet { 'tse-subnet-avzb-1':
-    ensure            => present,
-    region            => $region,
-    vpc               => 'tse-vpc',
-    cidr_block        => '10.98.110.0/24',
-    availability_zone => "${region}b",
-    route_table       => 'tse-routes',
-    require           => Ec2_vpc['tse-vpc'],
-    tags              => $tse_tags,
+    ensure                  => present,
+    region                  => $region,
+    vpc                     => 'tse-vpc',
+    cidr_block              => '10.98.110.0/24',
+    availability_zone       => "${region}b",
+    route_table             => 'tse-routes',
+    map_public_ip_on_launch => true,
+    require                 => Ec2_vpc['tse-vpc'],
+    tags                    => $tse_tags,
   }
   
   ec2_vpc_internet_gateway { 'tse-igw':

@@ -3,7 +3,7 @@ class tse_awsnodes::params {
   case $::ec2_region {
     # North America
     'us-west-2': {
-      $security_groups = ['tse-agents']
+      $security_groups = ['tse-agents','tse-crossconnect']
       $redhat7 = 'ami-4dbf9e7d'
       $redhat6 = 'ami-2faa861f'
       $windows2012 = 'ami-7f634e4f'
@@ -14,7 +14,7 @@ class tse_awsnodes::params {
     }
     # Sydney
     'ap-southeast-2': {
-      $security_groups = ['tse-agents']
+      $security_groups = ['tse-agents','tse-crossconnect']
       $redhat7 = 'ami-d3daace9'
       $redhat6 = 'ami-e5ec9cdf'
       $windows2012 = 'ami-dd1b6be7'
@@ -26,7 +26,7 @@ class tse_awsnodes::params {
     # Europe
     # UK + Ireland
     'eu-west-1': {
-      $security_groups = ['tse-agents']
+      $security_groups = ['tse-agents','tse-crossconnect']
       $redhat7 = 'ami-25158352'
       $redhat6 = 'ami-837de3f4'
       $windows2012 = 'ami-5d62ff2a'

@@ -1,5 +1,5 @@
-class tse_awsnodes::securitygroups (
-  $region = $::ec2_region,
+define tse_awsnodes::securitygroups (
+  $region = $title,
 ) {
   $tse_tags = {
       'department' => 'TSE',
@@ -37,9 +37,6 @@ class tse_awsnodes::securitygroups (
         cidr => '10.98.0.0/16', 
         port => '-1', 
         protocol => 'icmp'
-      },
-      {
-       security_group => 'tse-agents',
       },
     ],
     tags => $tse_tags,
@@ -86,6 +83,17 @@ class tse_awsnodes::securitygroups (
         port => '-1', 
         protocol => 'icmp'
       },
+    ],
+    tags => $tse_tags,
+  }
+
+
+  ec2_securitygroup { 'tse-crossconnect':
+    ensure      => present,
+    region      => $region,
+    vpc         => 'tse-vpc',
+    description => 'Security Group that allows masters to talk to agents and vice versa - prevents race condition',
+    ingress     => [
       {
         security_group => 'tse-master',
       },
@@ -93,6 +101,7 @@ class tse_awsnodes::securitygroups (
         security_group => 'tse-agents',
       },
     ],
-    tags => $tse_tags,
+    tags    => $tse_tags,
+    require => Ec2_securitygroup['tse-master','tse-agents'],
   }
 }
