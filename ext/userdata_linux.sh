@@ -2,12 +2,12 @@
 
 # ERB generated userdata script
 
-PE_MASTER='hostname master.foo.com'
+PE_MASTER='hostnamemaster.foo.com'
 AWS_INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 
 # since we were passed @nodename we are prepending it
 # to instance-id
-PE_CERTNAME="nodename test-${AWS_INSTANCE_ID}"
+PE_CERTNAME="nodenametest-${AWS_INSTANCE_ID}"
 
 # these are attributes we know already
 PP_INSTANCE_ID="${AWS_INSTANCE_ID}"

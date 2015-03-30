@@ -2,9 +2,9 @@
 # we are just setting all the variables
 
 
-$pe_master_hostname = 'hostname master.foo.com'
+$pe_master_hostname = 'hostnamemaster.foo.com'
 $pe_version_string = '9.9.9.9.9'
-$nodename = 'nodename test'
+$nodename = 'nodenametest'
 $pp_uuid = 'pp_uuid BD018C91-EEA2-4641-85C1-3EEA09282639'
 $pp_instance_id = 'pp_instance_id i-4502f24a'
 $pp_image_name = 'pp_image_name ami-4dbf9e7d'
