@@ -12,6 +12,17 @@ class tse_awsnodes::params {
       $ubuntu1204 = 'ami-fd7959cd'
       $amazonlinux = 'ami-7f79544f'
     }
+    # Singapore
+    'ap-southeast-1': {
+      $security_groups = ['tse-agents','tse-crossconnect']
+      $redhat7 = 'ami-dc1c2b8e'
+      $redhat6 = 'ami-fc98a9ae'
+      $windows2012 = 'ami-ae7c41fc'
+      $windows2008 = 'ami-2298aa70'
+      $ubuntu1404 = 'ami-84f0cfd6'
+      $ubuntu1204 = 'ami-0c27195e'
+      $amazonlinux = 'ami-5e73420c'
+    }
     # Sydney
     'ap-southeast-2': {
       $security_groups = ['tse-agents','tse-crossconnect']
